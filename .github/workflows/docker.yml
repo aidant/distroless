@@ -13,10 +13,8 @@ jobs:
       matrix:
         node_version:
           - '14'
-          - '14.0'
-          - '14.1'
-          - '14.0.0'
-          - '14.1.0'
+          - '14.2'
+          - '14.2.0'
 
     steps:
       - uses: actions/checkout@v2
