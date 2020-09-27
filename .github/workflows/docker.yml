@@ -36,13 +36,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          path: ./node
+          context: ./node
           build_args:  NODE_VERSION=${{ matrix.node_version }}
           repository: ${{ github.repository }}/node
           tags: ${{ matrix.node_version }}
